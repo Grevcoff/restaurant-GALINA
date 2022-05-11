@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище fastpitModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="id_Customer" />
+          </Key>
+          <Property Name="id_Customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="secondname" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="adress" Type="nvarchar" MaxLength="50" />
+          <Property Name="number" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Doljnost">
+          <Key>
+            <PropertyRef Name="id_Dolj" />
+          </Key>
+          <Property Name="id_Dolj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameofdolj" Type="nvarchar" MaxLength="50" />
+          <Property Name="oklad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Izgotovleniya">
+          <Key>
+            <PropertyRef Name="id_Izgotovleniya" />
+          </Key>
+          <Property Name="id_Izgotovleniya" Type="int" Nullable="false" />
+          <Property Name="nameofizg" Type="nvarchar" MaxLength="50" />
+          <Property Name="ingridient_1" Type="int" />
+          <Property Name="ingridient_2" Type="int" />
+          <Property Name="ingridient_3" Type="int" />
+          <Property Name="ingridient_4" Type="int" />
+          <Property Name="ingridient_5" Type="int" />
+          <Property Name="ingridient_6" Type="int" />
+          <Property Name="ingridient_7" Type="int" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="MedBook">
+          <Key>
+            <PropertyRef Name="id_Mb" />
+          </Key>
+          <Property Name="id_Mb" Type="int" Nullable="false" />
+          <Property Name="yeap" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Postavshsik">
+          <Key>
+            <PropertyRef Name="id_Post" />
+          </Key>
+          <Property Name="id_Post" Type="int" Nullable="false" />
+          <Property Name="nameofpost" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Produkty">
+          <Key>
+            <PropertyRef Name="id_Prod" />
+          </Key>
+          <Property Name="id_Prod" Type="int" Nullable="false" />
+          <Property Name="nameofprod" Type="nvarchar" MaxLength="50" />
+          <Property Name="postavshik" Type="int" />
+          <Property Name="kolvosklad" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Sotrudnik">
+          <Key>
+            <PropertyRef Name="id_Sotr" />
+          </Key>
+          <Property Name="id_Sotr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="secondname" Type="nvarchar" MaxLength="50" />
+          <Property Name="codsotr" Type="nvarchar" MaxLength="50" />
+          <Property Name="pas_num" Type="nchar" MaxLength="10" />
+          <Property Name="pas_ser" Type="nchar" MaxLength="10" />
+          <Property Name="adress" Type="nvarchar" MaxLength="50" />
+          <Property Name="medbook" Type="int" />
+          <Property Name="dolj" Type="int" />
+        </EntityType>
+        <EntityType Name="Zakaz">
+          <Key>
+            <PropertyRef Name="id_Zakaza" />
+          </Key>
+          <Property Name="id_Zakaza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Izgotovleniya" Type="int" />
+          <Property Name="id_Sotrudnika" Type="int" />
+          <Property Name="id_Klienta" Type="int" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+          <Property Name="time" Type="time" Precision="7" />
+        </EntityType>
+        <Association Name="FK_Izgotovleniya_Produkty">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty1">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty2">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty3">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty4">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty5">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_6" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty6">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_7" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produkty_Postavshsik">
+          <End Role="Postavshsik" Type="Self.Postavshsik" Multiplicity="0..1" />
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postavshsik">
+              <PropertyRef Name="id_Post" />
+            </Principal>
+            <Dependent Role="Produkty">
+              <PropertyRef Name="postavshik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sotrudnik_Doljnost">
+          <End Role="Doljnost" Type="Self.Doljnost" Multiplicity="0..1" />
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doljnost">
+              <PropertyRef Name="id_Dolj" />
+            </Principal>
+            <Dependent Role="Sotrudnik">
+              <PropertyRef Name="dolj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sotrudnik_MedBook">
+          <End Role="MedBook" Type="Self.MedBook" Multiplicity="0..1" />
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedBook">
+              <PropertyRef Name="id_Mb" />
+            </Principal>
+            <Dependent Role="Sotrudnik">
+              <PropertyRef Name="medbook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="id_Customer" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="id_Klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Izgotovleniya">
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="0..1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Izgotovleniya">
+              <PropertyRef Name="id_Izgotovleniya" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="id_Izgotovleniya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Sotrudnik">
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="0..1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudnik">
+              <PropertyRef Name="id_Sotr" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="id_Sotrudnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище fastpitModelContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doljnost" EntityType="Self.Doljnost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Izgotovleniya" EntityType="Self.Izgotovleniya" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedBook" EntityType="Self.MedBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postavshsik" EntityType="Self.Postavshsik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produkty" EntityType="Self.Produkty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sotrudnik" EntityType="Self.Sotrudnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zakaz" EntityType="Self.Zakaz" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Izgotovleniya_Produkty" Association="Self.FK_Izgotovleniya_Produkty">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty1" Association="Self.FK_Izgotovleniya_Produkty1">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty2" Association="Self.FK_Izgotovleniya_Produkty2">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty3" Association="Self.FK_Izgotovleniya_Produkty3">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty4" Association="Self.FK_Izgotovleniya_Produkty4">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty5" Association="Self.FK_Izgotovleniya_Produkty5">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty6" Association="Self.FK_Izgotovleniya_Produkty6">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produkty_Postavshsik" Association="Self.FK_Produkty_Postavshsik">
+            <End Role="Postavshsik" EntitySet="Postavshsik" />
+            <End Role="Produkty" EntitySet="Produkty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sotrudnik_Doljnost" Association="Self.FK_Sotrudnik_Doljnost">
+            <End Role="Doljnost" EntitySet="Doljnost" />
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sotrudnik_MedBook" Association="Self.FK_Sotrudnik_MedBook">
+            <End Role="MedBook" EntitySet="MedBook" />
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Customers" Association="Self.FK_Zakaz_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Izgotovleniya" Association="Self.FK_Zakaz_Izgotovleniya">
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Sotrudnik" Association="Self.FK_Zakaz_Sotrudnik">
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="fastpitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="id_Customer" />
+          </Key>
+          <Property Name="id_Customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secondname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Zakaz" Relationship="Self.FK_Zakaz_Customers" FromRole="Customers" ToRole="Zakaz" />
+        </EntityType>
+        <EntityType Name="Doljnost">
+          <Key>
+            <PropertyRef Name="id_Dolj" />
+          </Key>
+          <Property Name="id_Dolj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameofdolj" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oklad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sotrudnik" Relationship="Self.FK_Sotrudnik_Doljnost" FromRole="Doljnost" ToRole="Sotrudnik" />
+        </EntityType>
+        <EntityType Name="Izgotovleniya">
+          <Key>
+            <PropertyRef Name="id_Izgotovleniya" />
+          </Key>
+          <Property Name="id_Izgotovleniya" Type="Int32" Nullable="false" />
+          <Property Name="nameofizg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ingridient_1" Type="Int32" />
+          <Property Name="ingridient_2" Type="Int32" />
+          <Property Name="ingridient_3" Type="Int32" />
+          <Property Name="ingridient_4" Type="Int32" />
+          <Property Name="ingridient_5" Type="Int32" />
+          <Property Name="ingridient_6" Type="Int32" />
+          <Property Name="ingridient_7" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK_Izgotovleniya_Produkty" FromRole="Izgotovleniya" ToRole="Produkty" />
+          <NavigationProperty Name="Produkty1" Relationship="Self.FK_Izgotovleniya_Produkty1" FromRole="Izgotovleniya" ToRole="Produkty" />
+          <NavigationProperty Name="Produkty2" Relationship="Self.FK_Izgotovleniya_Produkty2" FromRole="Izgotovleniya" ToRole="Produkty" />
+          <NavigationProperty Name="Produkty3" Relationship="Self.FK_Izgotovleniya_Produkty3" FromRole="Izgotovleniya" ToRole="Produkty" />
+          <NavigationProperty Name="Produkty4" Relationship="Self.FK_Izgotovleniya_Produkty4" FromRole="Izgotovleniya" ToRole="Produkty" />
+          <NavigationProperty Name="Produkty5" Relationship="Self.FK_Izgotovleniya_Produkty5" FromRole="Izgotovleniya" ToRole="Produkty" />
+          <NavigationProperty Name="Produkty6" Relationship="Self.FK_Izgotovleniya_Produkty6" FromRole="Izgotovleniya" ToRole="Produkty" />
+          <NavigationProperty Name="Zakaz" Relationship="Self.FK_Zakaz_Izgotovleniya" FromRole="Izgotovleniya" ToRole="Zakaz" />
+        </EntityType>
+        <EntityType Name="MedBook">
+          <Key>
+            <PropertyRef Name="id_Mb" />
+          </Key>
+          <Property Name="id_Mb" Type="Int32" Nullable="false" />
+          <Property Name="yeap" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Sotrudnik" Relationship="Self.FK_Sotrudnik_MedBook" FromRole="MedBook" ToRole="Sotrudnik" />
+        </EntityType>
+        <EntityType Name="Postavshsik">
+          <Key>
+            <PropertyRef Name="id_Post" />
+          </Key>
+          <Property Name="id_Post" Type="Int32" Nullable="false" />
+          <Property Name="nameofpost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Produkty" Relationship="Self.FK_Produkty_Postavshsik" FromRole="Postavshsik" ToRole="Produkty" />
+        </EntityType>
+        <EntityType Name="Produkty">
+          <Key>
+            <PropertyRef Name="id_Prod" />
+          </Key>
+          <Property Name="id_Prod" Type="Int32" Nullable="false" />
+          <Property Name="nameofprod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="postavshik" Type="Int32" />
+          <Property Name="kolvosklad" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Izgotovleniya" Relationship="Self.FK_Izgotovleniya_Produkty" FromRole="Produkty" ToRole="Izgotovleniya" />
+          <NavigationProperty Name="Izgotovleniya1" Relationship="Self.FK_Izgotovleniya_Produkty1" FromRole="Produkty" ToRole="Izgotovleniya" />
+          <NavigationProperty Name="Izgotovleniya2" Relationship="Self.FK_Izgotovleniya_Produkty2" FromRole="Produkty" ToRole="Izgotovleniya" />
+          <NavigationProperty Name="Izgotovleniya3" Relationship="Self.FK_Izgotovleniya_Produkty3" FromRole="Produkty" ToRole="Izgotovleniya" />
+          <NavigationProperty Name="Izgotovleniya4" Relationship="Self.FK_Izgotovleniya_Produkty4" FromRole="Produkty" ToRole="Izgotovleniya" />
+          <NavigationProperty Name="Izgotovleniya5" Relationship="Self.FK_Izgotovleniya_Produkty5" FromRole="Produkty" ToRole="Izgotovleniya" />
+          <NavigationProperty Name="Izgotovleniya6" Relationship="Self.FK_Izgotovleniya_Produkty6" FromRole="Produkty" ToRole="Izgotovleniya" />
+          <NavigationProperty Name="Postavshsik" Relationship="Self.FK_Produkty_Postavshsik" FromRole="Produkty" ToRole="Postavshsik" />
+        </EntityType>
+        <EntityType Name="Sotrudnik">
+          <Key>
+            <PropertyRef Name="id_Sotr" />
+          </Key>
+          <Property Name="id_Sotr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secondname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="codsotr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pas_num" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="pas_ser" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="medbook" Type="Int32" />
+          <Property Name="dolj" Type="Int32" />
+          <NavigationProperty Name="Doljnost" Relationship="Self.FK_Sotrudnik_Doljnost" FromRole="Sotrudnik" ToRole="Doljnost" />
+          <NavigationProperty Name="MedBook1" Relationship="Self.FK_Sotrudnik_MedBook" FromRole="Sotrudnik" ToRole="MedBook" />
+          <NavigationProperty Name="Zakaz" Relationship="Self.FK_Zakaz_Sotrudnik" FromRole="Sotrudnik" ToRole="Zakaz" />
+        </EntityType>
+        <EntityType Name="Zakaz">
+          <Key>
+            <PropertyRef Name="id_Zakaza" />
+          </Key>
+          <Property Name="id_Zakaza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Izgotovleniya" Type="Int32" />
+          <Property Name="id_Sotrudnika" Type="Int32" />
+          <Property Name="id_Klienta" Type="Int32" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="time" Type="Time" Precision="7" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Zakaz_Customers" FromRole="Zakaz" ToRole="Customers" />
+          <NavigationProperty Name="Izgotovleniya" Relationship="Self.FK_Zakaz_Izgotovleniya" FromRole="Zakaz" ToRole="Izgotovleniya" />
+          <NavigationProperty Name="Sotrudnik" Relationship="Self.FK_Zakaz_Sotrudnik" FromRole="Zakaz" ToRole="Sotrudnik" />
+        </EntityType>
+        <Association Name="FK_Zakaz_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="id_Customer" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="id_Klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sotrudnik_Doljnost">
+          <End Role="Doljnost" Type="Self.Doljnost" Multiplicity="0..1" />
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doljnost">
+              <PropertyRef Name="id_Dolj" />
+            </Principal>
+            <Dependent Role="Sotrudnik">
+              <PropertyRef Name="dolj" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty1">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty2">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty3">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty4">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty5">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_6" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Izgotovleniya_Produkty6">
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produkty">
+              <PropertyRef Name="id_Prod" />
+            </Principal>
+            <Dependent Role="Izgotovleniya">
+              <PropertyRef Name="ingridient_7" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Izgotovleniya">
+          <End Role="Izgotovleniya" Type="Self.Izgotovleniya" Multiplicity="0..1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Izgotovleniya">
+              <PropertyRef Name="id_Izgotovleniya" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="id_Izgotovleniya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sotrudnik_MedBook">
+          <End Role="MedBook" Type="Self.MedBook" Multiplicity="0..1" />
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedBook">
+              <PropertyRef Name="id_Mb" />
+            </Principal>
+            <Dependent Role="Sotrudnik">
+              <PropertyRef Name="medbook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produkty_Postavshsik">
+          <End Role="Postavshsik" Type="Self.Postavshsik" Multiplicity="0..1" />
+          <End Role="Produkty" Type="Self.Produkty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postavshsik">
+              <PropertyRef Name="id_Post" />
+            </Principal>
+            <Dependent Role="Produkty">
+              <PropertyRef Name="postavshik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz_Sotrudnik">
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="0..1" />
+          <End Role="Zakaz" Type="Self.Zakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudnik">
+              <PropertyRef Name="id_Sotr" />
+            </Principal>
+            <Dependent Role="Zakaz">
+              <PropertyRef Name="id_Sotrudnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="fastpitEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Doljnost" EntityType="Self.Doljnost" />
+          <EntitySet Name="Izgotovleniya" EntityType="Self.Izgotovleniya" />
+          <EntitySet Name="MedBook" EntityType="Self.MedBook" />
+          <EntitySet Name="Postavshsik" EntityType="Self.Postavshsik" />
+          <EntitySet Name="Produkty" EntityType="Self.Produkty" />
+          <EntitySet Name="Sotrudnik" EntityType="Self.Sotrudnik" />
+          <EntitySet Name="Zakaz" EntityType="Self.Zakaz" />
+          <AssociationSet Name="FK_Zakaz_Customers" Association="Self.FK_Zakaz_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sotrudnik_Doljnost" Association="Self.FK_Sotrudnik_Doljnost">
+            <End Role="Doljnost" EntitySet="Doljnost" />
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty" Association="Self.FK_Izgotovleniya_Produkty">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty1" Association="Self.FK_Izgotovleniya_Produkty1">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty2" Association="Self.FK_Izgotovleniya_Produkty2">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty3" Association="Self.FK_Izgotovleniya_Produkty3">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty4" Association="Self.FK_Izgotovleniya_Produkty4">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty5" Association="Self.FK_Izgotovleniya_Produkty5">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Izgotovleniya_Produkty6" Association="Self.FK_Izgotovleniya_Produkty6">
+            <End Role="Produkty" EntitySet="Produkty" />
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Izgotovleniya" Association="Self.FK_Zakaz_Izgotovleniya">
+            <End Role="Izgotovleniya" EntitySet="Izgotovleniya" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sotrudnik_MedBook" Association="Self.FK_Sotrudnik_MedBook">
+            <End Role="MedBook" EntitySet="MedBook" />
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produkty_Postavshsik" Association="Self.FK_Produkty_Postavshsik">
+            <End Role="Postavshsik" EntitySet="Postavshsik" />
+            <End Role="Produkty" EntitySet="Produkty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz_Sotrudnik" Association="Self.FK_Zakaz_Sotrudnik">
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+            <End Role="Zakaz" EntitySet="Zakaz" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище fastpitModelContainer" CdmEntityContainer="fastpitEntities1">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="fastpitModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="id_Customer" ColumnName="id_Customer" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="secondname" ColumnName="secondname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="number" ColumnName="number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doljnost">
+            <EntityTypeMapping TypeName="fastpitModel.Doljnost">
+              <MappingFragment StoreEntitySet="Doljnost">
+                <ScalarProperty Name="id_Dolj" ColumnName="id_Dolj" />
+                <ScalarProperty Name="nameofdolj" ColumnName="nameofdolj" />
+                <ScalarProperty Name="oklad" ColumnName="oklad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Izgotovleniya">
+            <EntityTypeMapping TypeName="fastpitModel.Izgotovleniya">
+              <MappingFragment StoreEntitySet="Izgotovleniya">
+                <ScalarProperty Name="id_Izgotovleniya" ColumnName="id_Izgotovleniya" />
+                <ScalarProperty Name="nameofizg" ColumnName="nameofizg" />
+                <ScalarProperty Name="ingridient_1" ColumnName="ingridient_1" />
+                <ScalarProperty Name="ingridient_2" ColumnName="ingridient_2" />
+                <ScalarProperty Name="ingridient_3" ColumnName="ingridient_3" />
+                <ScalarProperty Name="ingridient_4" ColumnName="ingridient_4" />
+                <ScalarProperty Name="ingridient_5" ColumnName="ingridient_5" />
+                <ScalarProperty Name="ingridient_6" ColumnName="ingridient_6" />
+                <ScalarProperty Name="ingridient_7" ColumnName="ingridient_7" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedBook">
+            <EntityTypeMapping TypeName="fastpitModel.MedBook">
+              <MappingFragment StoreEntitySet="MedBook">
+                <ScalarProperty Name="id_Mb" ColumnName="id_Mb" />
+                <ScalarProperty Name="yeap" ColumnName="yeap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postavshsik">
+            <EntityTypeMapping TypeName="fastpitModel.Postavshsik">
+              <MappingFragment StoreEntitySet="Postavshsik">
+                <ScalarProperty Name="id_Post" ColumnName="id_Post" />
+                <ScalarProperty Name="nameofpost" ColumnName="nameofpost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produkty">
+            <EntityTypeMapping TypeName="fastpitModel.Produkty">
+              <MappingFragment StoreEntitySet="Produkty">
+                <ScalarProperty Name="id_Prod" ColumnName="id_Prod" />
+                <ScalarProperty Name="nameofprod" ColumnName="nameofprod" />
+                <ScalarProperty Name="postavshik" ColumnName="postavshik" />
+                <ScalarProperty Name="kolvosklad" ColumnName="kolvosklad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrudnik">
+            <EntityTypeMapping TypeName="fastpitModel.Sotrudnik">
+              <MappingFragment StoreEntitySet="Sotrudnik">
+                <ScalarProperty Name="id_Sotr" ColumnName="id_Sotr" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="secondname" ColumnName="secondname" />
+                <ScalarProperty Name="codsotr" ColumnName="codsotr" />
+                <ScalarProperty Name="pas_num" ColumnName="pas_num" />
+                <ScalarProperty Name="pas_ser" ColumnName="pas_ser" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="medbook" ColumnName="medbook" />
+                <ScalarProperty Name="dolj" ColumnName="dolj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zakaz">
+            <EntityTypeMapping TypeName="fastpitModel.Zakaz">
+              <MappingFragment StoreEntitySet="Zakaz">
+                <ScalarProperty Name="id_Zakaza" ColumnName="id_Zakaza" />
+                <ScalarProperty Name="id_Izgotovleniya" ColumnName="id_Izgotovleniya" />
+                <ScalarProperty Name="id_Sotrudnika" ColumnName="id_Sotrudnika" />
+                <ScalarProperty Name="id_Klienta" ColumnName="id_Klienta" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
